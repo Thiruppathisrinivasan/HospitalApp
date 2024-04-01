@@ -1,0 +1,24 @@
+﻿@*@model HospitalApp.Models.DoctorScheduleListModel
+<div class="">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Session</th>
+                <th>Duration</th>
+            </tr>
+        </thead>
+        <tbody class="schedule-list">
+            @{ 
+                foreach (var list in Model.ResultField.data)
+                {
+                <tr>
+                    <td>@list.Date</td>
+                    <td>@list.Session</td>
+                    <td>@list.Time</td>
+                </tr>
+                    } }
+
+        </tbody>
+    </table>
+</div>*@

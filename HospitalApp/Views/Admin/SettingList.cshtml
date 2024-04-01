@@ -1,0 +1,41 @@
+﻿@model HospitalApp.Models.DropDownListModel
+
+@{
+    ViewBag.Title = "SettingList";
+}
+
+<h2>Setting</h2>
+
+<div class="row">
+    <div class="col-md-6">
+       @Html.DropDownListFor(model => model.CodeName, new SelectList(ViewBag.codename, "Name", "Name"), "select code name", new { @class = "form-control" })
+    </div>
+    <div class="col-md-6">
+        <a role="button" class="btn btn-primary" id="btnSearch"> Search</a>
+    </div>
+    <div id="griddata">
+        @Html.Partial("SearchSettingsList", Model);
+    </div>
+</div>
+<script>
+
+    $("#btnSearch").click(function () {
+        var CodeName = $('#CodeName').val();
+        getData(1, CodeName);
+    });
+
+    let getData = (pageNo,CodeNAME) => {
+        var searchdta = { "CodeName":CodeNAME, "page": pageNo };
+        $.ajax({
+            url: "@Url.Action("SearchSettingsList", "Admin")",
+            data: searchdta,
+        type: "GET",
+        success: function (result) {
+            if (result != null) {
+                $("#griddata").html(result);
+            }
+        } })};
+</script>
+
+
+ 

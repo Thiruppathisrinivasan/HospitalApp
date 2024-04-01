@@ -1,0 +1,90 @@
+﻿@model HospitalApp.Models.LoginModal
+   
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/Login_layout.cshtml";
+
+}
+
+
+<style>
+    body{
+        background-image:linear-gradient(rgba(228,228,247,255),rgba(249,231,228,255));
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+.login-page-container1{
+    height:500px;
+  
+  width:70%;
+}
+.login-page-container1 > img {
+    width:100%;
+    height:100%;
+object-fit:cover;
+}
+.login-page-container2{
+    width:30%;
+    background-color:#fff;
+}
+.login-button{
+    background-color:#99aaff;
+    color:#fff;
+}
+.signup-button{
+    color:#99aaff;
+}
+p{
+    font-size:12px;
+    font-weight:500;
+}
+.full{
+    border-radius:10px;
+}
+</style>
+<div class="container d-flex justify-content-center m-5 full">
+    <div class="login-page-container1">
+       
+            <img src="~/Content/Images/loginimage(1).png" />
+       
+    </div>
+    <div class="login-page-container2 d-flex flex-column  justify-content-center align-items-center">
+
+        <div class="logo-con">
+            <img src="~/Content/Images/logo.png" />
+        </div>
+          
+        <div class="form-con">
+            <div class="text-center">
+                <h2>Login</h2>
+                <p>Enter your Details</p>
+                @{ 
+                    if (TempData["msg"] != null)
+                    {
+                        <label class="form-label" style="color:red">@TempData["msg"]</label>
+                    }
+                }
+            </div>
+            <form method="post">
+                
+                @Html.Label("Username", new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                </br>
+                @Html.Label("Password", new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.PassWord, new { @class = "form-control", @type = "password" })
+                @Html.ValidationMessageFor(model => model.PassWord, "", new { @class = "text-danger" })
+                </br>
+                @Html.CheckBoxFor(model => model.RememberMe, new { @checked = "checked" })
+                @Html.Label("Remember me", new { @class = "form-label" })
+                </br>
+                <div class="d-grid gap-2 mx-auto mb-5">
+                    <input type="submit" class="btn login-button btn-b" value="signin" />
+                
+                </div>
+                <div>
+                    Dont Have an account ? @Html.ActionLink("signup", "Signup", "Home", new { id = 0 }, new { @class = "signup-button" })
+                </div>
+            </form>
+        </div>
+        </div>
+</div>

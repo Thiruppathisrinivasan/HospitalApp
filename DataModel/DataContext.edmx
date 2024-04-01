@@ -1,0 +1,582 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DataContext.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AppointmentBooking">
+          <Key>
+            <PropertyRef Name="bookingID" />
+          </Key>
+          <Property Name="bookingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patientID" Type="int" />
+          <Property Name="DoctorID" Type="int" />
+          <Property Name="Date" Type="varchar" MaxLength="20" />
+          <Property Name="Time" Type="int" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+          <Property Name="status" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Availabilityslots">
+          <Key>
+            <PropertyRef Name="slotID" />
+          </Key>
+          <Property Name="slotID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="doctorID" Type="int" />
+          <Property Name="Date" Type="varchar" MaxLength="20" />
+          <Property Name="session" Type="varchar" MaxLength="20" />
+          <Property Name="slotTime" Type="varchar" MaxLength="20" />
+          <Property Name="patientID" Type="int" />
+          <Property Name="status" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="CodeController">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodeName" Type="varchar" MaxLength="255" />
+          <Property Name="CodeID" Type="int" />
+          <Property Name="name" Type="varchar" MaxLength="255" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="DoctorAvailabilityMaster">
+          <Key>
+            <PropertyRef Name="AvailID" />
+          </Key>
+          <Property Name="AvailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DoctorID" Type="int" />
+          <Property Name="status" Type="varchar" MaxLength="255" />
+          <Property Name="Date" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="DoctorSchedule">
+          <Key>
+            <PropertyRef Name="ScheduleID" />
+          </Key>
+          <Property Name="doctorID" Type="int" />
+          <Property Name="Date" Type="varchar" MaxLength="20" />
+          <Property Name="Session" Type="varchar" MaxLength="20" />
+          <Property Name="Duration" Type="int" />
+          <Property Name="ScheduleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Doctorscheduledetails">
+          <Key>
+            <PropertyRef Name="scheduleID" />
+          </Key>
+          <Property Name="scheduleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AvailID" Type="int" />
+          <Property Name="session" Type="varchar" MaxLength="20" />
+          <Property Name="Duration" Type="int" />
+        </EntityType>
+        <EntityType Name="EmployeeDetails">
+          <Key>
+            <PropertyRef Name="EmpID" />
+          </Key>
+          <Property Name="EmpID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="255" />
+          <Property Name="EmpCode" Type="varchar" MaxLength="255" />
+          <Property Name="Name" Type="varchar" MaxLength="255" />
+          <Property Name="Gender" Type="varchar" MaxLength="255" />
+          <Property Name="Age" Type="int" />
+          <Property Name="DOB" Type="varchar" MaxLength="255" />
+          <Property Name="BloodGroup" Type="varchar" MaxLength="255" />
+          <Property Name="MaritalStatus" Type="varchar" MaxLength="255" />
+          <Property Name="Qualification" Type="varchar" MaxLength="255" />
+          <Property Name="Specialization" Type="varchar" MaxLength="20" />
+          <Property Name="Doj" Type="datetime" />
+          <Property Name="Address" Type="varchar" MaxLength="255" />
+          <Property Name="Email" Type="varchar" MaxLength="255" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="255" />
+          <Property Name="Nationality" Type="varchar" MaxLength="255" />
+          <Property Name="UserName" Type="varchar" MaxLength="255" />
+          <Property Name="Password" Type="varchar" MaxLength="255" />
+          <Property Name="Created_at" Type="datetime" />
+          <Property Name="Status" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="LoginCredentials">
+          <Key>
+            <PropertyRef Name="TotalID" />
+          </Key>
+          <Property Name="Username" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="PatientID" Type="int" />
+          <Property Name="EmployeeID" Type="int" />
+          <Property Name="TotalID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PatientDetails">
+          <Key>
+            <PropertyRef Name="PatID" />
+          </Key>
+          <Property Name="PatID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" />
+          <Property Name="Gender" Type="varchar" MaxLength="255" />
+          <Property Name="Age" Type="int" />
+          <Property Name="DOB" Type="varchar" MaxLength="255" />
+          <Property Name="BloodGroup" Type="varchar" MaxLength="255" />
+          <Property Name="MaritalStatus" Type="varchar" MaxLength="255" />
+          <Property Name="Address" Type="varchar" MaxLength="255" />
+          <Property Name="Email" Type="varchar" MaxLength="255" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="255" />
+          <Property Name="Nationality" Type="varchar" MaxLength="255" />
+          <Property Name="UserName" Type="varchar" MaxLength="255" />
+          <Property Name="Password" Type="varchar" MaxLength="255" />
+          <Property Name="Created_at" Type="datetime" />
+          <Property Name="Status" Type="varchar" MaxLength="255" />
+          <Property Name="Role" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'HospitalManagement.dbo.Roles' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Roles">
+          <Property Name="RoleID" Type="int" />
+          <Property Name="RoleName" Type="varchar" MaxLength="255" />
+        </EntityType>-->
+        <EntityType Name="slotdetails">
+          <Key>
+            <PropertyRef Name="slotID" />
+          </Key>
+          <Property Name="slotID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AvailID" Type="int" />
+          <Property Name="slotTime" Type="varchar" MaxLength="20" />
+          <Property Name="status" Type="varchar" MaxLength="20" />
+          <Property Name="PatientID" Type="int" />
+          <Property Name="description" Type="varchar" MaxLength="255" />
+          <Property Name="canceldescription" Type="varchar" MaxLength="255" />
+          <Property Name="scheduleID" Type="int" />
+        </EntityType>
+        <Association Name="FK__Doctorsch__Avail__52593CB8">
+          <End Role="DoctorAvailabilityMaster" Type="Self.DoctorAvailabilityMaster" Multiplicity="0..1" />
+          <End Role="Doctorscheduledetails" Type="Self.Doctorscheduledetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DoctorAvailabilityMaster">
+              <PropertyRef Name="AvailID" />
+            </Principal>
+            <Dependent Role="Doctorscheduledetails">
+              <PropertyRef Name="AvailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoginCred__Emplo__4316F928">
+          <End Role="EmployeeDetails" Type="Self.EmployeeDetails" Multiplicity="0..1" />
+          <End Role="LoginCredentials" Type="Self.LoginCredentials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeDetails">
+              <PropertyRef Name="EmpID" />
+            </Principal>
+            <Dependent Role="LoginCredentials">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoginCred__Patie__4222D4EF">
+          <End Role="PatientDetails" Type="Self.PatientDetails" Multiplicity="0..1" />
+          <End Role="LoginCredentials" Type="Self.LoginCredentials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientDetails">
+              <PropertyRef Name="PatID" />
+            </Principal>
+            <Dependent Role="LoginCredentials">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DataContextStoreContainer">
+          <EntitySet Name="AppointmentBooking" EntityType="Self.AppointmentBooking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Availabilityslots" EntityType="Self.Availabilityslots" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CodeController" EntityType="Self.CodeController" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DoctorAvailabilityMaster" EntityType="Self.DoctorAvailabilityMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DoctorSchedule" EntityType="Self.DoctorSchedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doctorscheduledetails" EntityType="Self.Doctorscheduledetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeDetails" EntityType="Self.EmployeeDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoginCredentials" EntityType="Self.LoginCredentials" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientDetails" EntityType="Self.PatientDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="slotdetails" EntityType="Self.slotdetails" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Doctorsch__Avail__52593CB8" Association="Self.FK__Doctorsch__Avail__52593CB8">
+            <End Role="DoctorAvailabilityMaster" EntitySet="DoctorAvailabilityMaster" />
+            <End Role="Doctorscheduledetails" EntitySet="Doctorscheduledetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoginCred__Emplo__4316F928" Association="Self.FK__LoginCred__Emplo__4316F928">
+            <End Role="EmployeeDetails" EntitySet="EmployeeDetails" />
+            <End Role="LoginCredentials" EntitySet="LoginCredentials" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoginCred__Patie__4222D4EF" Association="Self.FK__LoginCred__Patie__4222D4EF">
+            <End Role="PatientDetails" EntitySet="PatientDetails" />
+            <End Role="LoginCredentials" EntitySet="LoginCredentials" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DataContext" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="DataContextContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AppointmentBooking" EntityType="DataContext.AppointmentBooking" />
+          <EntitySet Name="Availabilityslots" EntityType="DataContext.Availabilityslots" />
+          <EntitySet Name="CodeController" EntityType="DataContext.CodeController" />
+          <EntitySet Name="DoctorAvailabilityMaster" EntityType="DataContext.DoctorAvailabilityMaster" />
+          <EntitySet Name="DoctorSchedule" EntityType="DataContext.DoctorSchedule" />
+          <EntitySet Name="Doctorscheduledetails" EntityType="DataContext.Doctorscheduledetails" />
+          <EntitySet Name="EmployeeDetails" EntityType="DataContext.EmployeeDetails" />
+          <EntitySet Name="LoginCredentials" EntityType="DataContext.LoginCredentials" />
+          <EntitySet Name="PatientDetails" EntityType="DataContext.PatientDetails" />
+          <EntitySet Name="slotdetails" EntityType="DataContext.slotdetails" />
+          <AssociationSet Name="FK__Doctorsch__Avail__52593CB8" Association="DataContext.FK__Doctorsch__Avail__52593CB8">
+            <End Role="DoctorAvailabilityMaster" EntitySet="DoctorAvailabilityMaster" />
+            <End Role="Doctorscheduledetails" EntitySet="Doctorscheduledetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoginCred__Emplo__4316F928" Association="DataContext.FK__LoginCred__Emplo__4316F928">
+            <End Role="EmployeeDetails" EntitySet="EmployeeDetails" />
+            <End Role="LoginCredentials" EntitySet="LoginCredentials" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoginCred__Patie__4222D4EF" Association="DataContext.FK__LoginCred__Patie__4222D4EF">
+            <End Role="PatientDetails" EntitySet="PatientDetails" />
+            <End Role="LoginCredentials" EntitySet="LoginCredentials" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AppointmentBooking">
+          <Key>
+            <PropertyRef Name="bookingID" />
+          </Key>
+          <Property Name="bookingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patientID" Type="Int32" />
+          <Property Name="DoctorID" Type="Int32" />
+          <Property Name="Date" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Time" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Availabilityslots">
+          <Key>
+            <PropertyRef Name="slotID" />
+          </Key>
+          <Property Name="slotID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="doctorID" Type="Int32" />
+          <Property Name="Date" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="session" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="slotTime" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="patientID" Type="Int32" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CodeController">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodeName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CodeID" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DoctorAvailabilityMaster">
+          <Key>
+            <PropertyRef Name="AvailID" />
+          </Key>
+          <Property Name="AvailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DoctorID" Type="Int32" />
+          <Property Name="status" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Doctorscheduledetails" Relationship="DataContext.FK__Doctorsch__Avail__52593CB8" FromRole="DoctorAvailabilityMaster" ToRole="Doctorscheduledetails" />
+        </EntityType>
+        <EntityType Name="DoctorSchedule">
+          <Key>
+            <PropertyRef Name="ScheduleID" />
+          </Key>
+          <Property Name="doctorID" Type="Int32" />
+          <Property Name="Date" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Session" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Duration" Type="Int32" />
+          <Property Name="ScheduleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Doctorscheduledetails">
+          <Key>
+            <PropertyRef Name="scheduleID" />
+          </Key>
+          <Property Name="scheduleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AvailID" Type="Int32" />
+          <Property Name="session" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Duration" Type="Int32" />
+          <NavigationProperty Name="DoctorAvailabilityMaster" Relationship="DataContext.FK__Doctorsch__Avail__52593CB8" FromRole="Doctorscheduledetails" ToRole="DoctorAvailabilityMaster" />
+        </EntityType>
+        <EntityType Name="EmployeeDetails">
+          <Key>
+            <PropertyRef Name="EmpID" />
+          </Key>
+          <Property Name="EmpID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="EmpCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="DOB" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BloodGroup" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="MaritalStatus" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Qualification" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Specialization" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Doj" Type="DateTime" Precision="3" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Nationality" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Created_at" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LoginCredentials" Relationship="DataContext.FK__LoginCred__Emplo__4316F928" FromRole="EmployeeDetails" ToRole="LoginCredentials" />
+        </EntityType>
+        <EntityType Name="LoginCredentials">
+          <Key>
+            <PropertyRef Name="TotalID" />
+          </Key>
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PatientID" Type="Int32" />
+          <Property Name="EmployeeID" Type="Int32" />
+          <Property Name="TotalID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="EmployeeDetails" Relationship="DataContext.FK__LoginCred__Emplo__4316F928" FromRole="LoginCredentials" ToRole="EmployeeDetails" />
+          <NavigationProperty Name="PatientDetails" Relationship="DataContext.FK__LoginCred__Patie__4222D4EF" FromRole="LoginCredentials" ToRole="PatientDetails" />
+        </EntityType>
+        <EntityType Name="PatientDetails">
+          <Key>
+            <PropertyRef Name="PatID" />
+          </Key>
+          <Property Name="PatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="DOB" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BloodGroup" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="MaritalStatus" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Nationality" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Created_at" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Role" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LoginCredentials" Relationship="DataContext.FK__LoginCred__Patie__4222D4EF" FromRole="PatientDetails" ToRole="LoginCredentials" />
+        </EntityType>
+        <EntityType Name="slotdetails">
+          <Key>
+            <PropertyRef Name="slotID" />
+          </Key>
+          <Property Name="slotID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AvailID" Type="Int32" />
+          <Property Name="slotTime" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PatientID" Type="Int32" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="canceldescription" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="scheduleID" Type="Int32" />
+        </EntityType>
+        <Association Name="FK__Doctorsch__Avail__52593CB8">
+          <End Type="DataContext.DoctorAvailabilityMaster" Role="DoctorAvailabilityMaster" Multiplicity="0..1" />
+          <End Type="DataContext.Doctorscheduledetails" Role="Doctorscheduledetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DoctorAvailabilityMaster">
+              <PropertyRef Name="AvailID" />
+            </Principal>
+            <Dependent Role="Doctorscheduledetails">
+              <PropertyRef Name="AvailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoginCred__Emplo__4316F928">
+          <End Type="DataContext.EmployeeDetails" Role="EmployeeDetails" Multiplicity="0..1" />
+          <End Type="DataContext.LoginCredentials" Role="LoginCredentials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeDetails">
+              <PropertyRef Name="EmpID" />
+            </Principal>
+            <Dependent Role="LoginCredentials">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoginCred__Patie__4222D4EF">
+          <End Type="DataContext.PatientDetails" Role="PatientDetails" Multiplicity="0..1" />
+          <End Type="DataContext.LoginCredentials" Role="LoginCredentials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientDetails">
+              <PropertyRef Name="PatID" />
+            </Principal>
+            <Dependent Role="LoginCredentials">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="DataContext" />
+        <Alias Key="Target" Value="DataContext.Store" />
+        <EntityContainerMapping CdmEntityContainer="DataContextContainer" StorageEntityContainer="DataContextStoreContainer">
+          <EntitySetMapping Name="AppointmentBooking">
+            <EntityTypeMapping TypeName="DataContext.AppointmentBooking">
+              <MappingFragment StoreEntitySet="AppointmentBooking">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
+                <ScalarProperty Name="patientID" ColumnName="patientID" />
+                <ScalarProperty Name="bookingID" ColumnName="bookingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Availabilityslots">
+            <EntityTypeMapping TypeName="DataContext.Availabilityslots">
+              <MappingFragment StoreEntitySet="Availabilityslots">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="patientID" ColumnName="patientID" />
+                <ScalarProperty Name="slotTime" ColumnName="slotTime" />
+                <ScalarProperty Name="session" ColumnName="session" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="doctorID" ColumnName="doctorID" />
+                <ScalarProperty Name="slotID" ColumnName="slotID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CodeController">
+            <EntityTypeMapping TypeName="DataContext.CodeController">
+              <MappingFragment StoreEntitySet="CodeController">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="CodeID" ColumnName="CodeID" />
+                <ScalarProperty Name="CodeName" ColumnName="CodeName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DoctorAvailabilityMaster">
+            <EntityTypeMapping TypeName="DataContext.DoctorAvailabilityMaster">
+              <MappingFragment StoreEntitySet="DoctorAvailabilityMaster">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
+                <ScalarProperty Name="AvailID" ColumnName="AvailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DoctorSchedule">
+            <EntityTypeMapping TypeName="DataContext.DoctorSchedule">
+              <MappingFragment StoreEntitySet="DoctorSchedule">
+                <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="Session" ColumnName="Session" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="doctorID" ColumnName="doctorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Doctorscheduledetails">
+            <EntityTypeMapping TypeName="DataContext.Doctorscheduledetails">
+              <MappingFragment StoreEntitySet="Doctorscheduledetails">
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="session" ColumnName="session" />
+                <ScalarProperty Name="AvailID" ColumnName="AvailID" />
+                <ScalarProperty Name="scheduleID" ColumnName="scheduleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeDetails">
+            <EntityTypeMapping TypeName="DataContext.EmployeeDetails">
+              <MappingFragment StoreEntitySet="EmployeeDetails">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Created_at" ColumnName="Created_at" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Doj" ColumnName="Doj" />
+                <ScalarProperty Name="Specialization" ColumnName="Specialization" />
+                <ScalarProperty Name="Qualification" ColumnName="Qualification" />
+                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+                <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EmpCode" ColumnName="EmpCode" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoginCredentials">
+            <EntityTypeMapping TypeName="DataContext.LoginCredentials">
+              <MappingFragment StoreEntitySet="LoginCredentials">
+                <ScalarProperty Name="TotalID" ColumnName="TotalID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="PatientID" ColumnName="PatientID" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PatientDetails">
+            <EntityTypeMapping TypeName="DataContext.PatientDetails">
+              <MappingFragment StoreEntitySet="PatientDetails">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Created_at" ColumnName="Created_at" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+                <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PatID" ColumnName="PatID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="slotdetails">
+            <EntityTypeMapping TypeName="DataContext.slotdetails">
+              <MappingFragment StoreEntitySet="slotdetails">
+                <ScalarProperty Name="scheduleID" ColumnName="scheduleID" />
+                <ScalarProperty Name="canceldescription" ColumnName="canceldescription" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="PatientID" ColumnName="PatientID" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="slotTime" ColumnName="slotTime" />
+                <ScalarProperty Name="AvailID" ColumnName="AvailID" />
+                <ScalarProperty Name="slotID" ColumnName="slotID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

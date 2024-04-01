@@ -1,0 +1,78 @@
+﻿@model HospitalApp.Models.DoctorScheduleListModel
+
+
+<div class="row mt-3">
+    <div class="col-md-3">
+        <label class="form-label">Date</label>
+        @Html.TextBoxFor(model => model.Date, new { @class = "form-control" , type="date",id="searchdate" })
+    </div>
+
+    <div class="col-md-3">
+        <label class="form-label">session</label>
+        @Html.DropDownListFor(model => model.Session, new SelectList(ViewBag.Sessiondta, "Name", "Name"), "select the session", new { @class = "form-control", id = "searchsession" })
+    </div>
+
+    <div class="col-md-3">
+        
+        <a role="button" class="btn btn-primary mt-4 " id="btnSearch"> Search</a>
+    </div>
+    <div id="griddata">
+        @Html.Partial("_searchScheduleList", Model)
+    </div>
+</div>
+<script src="~/Scripts/jquery-2.0.0.js"></script>
+<script>
+    $(document).ready(function () {
+
+        let currentDate = new Date();
+        let year = currentDate.getFullYear();
+        let month = currentDate.getMonth() + 1;
+        let day = currentDate.getDate();
+        month = month < 10 ? "0" + month : month;
+        day = day < 10 ? "0" + day : day;
+
+        let formattedCurrentDate = `${year}-${month}-${day}`;
+
+
+        $('#searchdate').attr('min', formattedCurrentDate);
+
+
+        let nextWeekDate = new Date(currentDate);
+        nextWeekDate.setDate(nextWeekDate.getDate() + 7);
+        let nextWeekYear = nextWeekDate.getFullYear();
+        let nextWeekMonth = nextWeekDate.getMonth() + 1;
+        let nextWeekDay = nextWeekDate.getDate();
+        nextWeekMonth = nextWeekMonth < 10 ? "0" + nextWeekMonth : nextWeekMonth;
+        nextWeekDay = nextWeekDay < 10 ? "0" + nextWeekDay : nextWeekDay;
+        let formattedNextWeekDate = `${nextWeekYear}-${nextWeekMonth}-${nextWeekDay}`;
+        $('#searchdate').attr('max', formattedNextWeekDate);
+       
+        $('#searchdate').val("");
+        $("#searchsession").val("");
+
+    });
+
+
+    $("#btnSearch").click(function () {
+        var date = $('#searchdate').val();
+        var session = $("#searchsession").val();
+        console.log([date, session]);
+
+        //getData(1, date,session);
+    });
+
+    @*let getData = (pageNo, date,session) => {
+        debugger;
+        var searchdta = { "Date":date, "page": pageNo,"session":session };
+        $.ajax({
+            url: "@Url.Action("_searchScheduleList", "Doctor")",
+            data: searchdta,
+            type: "GET",
+            success: function (result) {
+                if (result != null) {
+                    $("#griddata").html(result);
+                }
+            } })};*@
+
+   
+</script>

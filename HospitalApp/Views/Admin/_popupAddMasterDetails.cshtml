@@ -1,0 +1,66 @@
+﻿@model HospitalApp.Models.DropDownCreation
+<form method="post" id="frmPopup">
+    <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create Dropdown</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <label for="CodeName" class="form-label">CodeName</label>
+                    @Html.TextBoxFor(model => model.CodeName, new { @class = "form-control codename" })
+
+                    <label for="Name" class="form-label">Name</label>
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control name" })
+
+                    <label for="Description" class="form-label">Description</label>
+                    @Html.TextBoxFor(model => model.Description, new { @class = "form-control des" })
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    
+                    <button type="submit" class="btn btn-primary" id="dropsubmit">Submit</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript" language="javascript">
+    $("#dropsubmit").click(function (e) {
+        debugger;
+        e.preventDefault();
+        let myForm = document.getElementById('frmPopup');
+        let formData = new FormData(myForm);
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("_popupAddMasterDetails", "Admin")',
+            contentType: false,
+            processData: false,
+            data: formData,
+            
+            success: function (result) {
+                debugger;
+                alert("data successfully added");
+            
+            },
+               
+            error: function (xhr, status, p3, p4) {
+                var err = "Error " + " " + status + " " + p3 + " " + p4;
+                if (xhr.responseText && xhr.responseText[0] == "{")
+                    err = JSON.parse(xhr.responseText).Message;
+                console.log(err);
+            },
+           
+        });
+      
+
+    });
+
+</script>

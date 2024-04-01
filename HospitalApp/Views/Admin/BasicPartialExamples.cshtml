@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "BasicPartialExamples";
+}
+
+<h2>BasicPartialExamples</h2>
+
+<div>
+    @{ MvcHtmlString partialresult = @Html.Partial("_PartialPage1");
+
+     
+
+             }
+    @partialfunction(partialresult)
+    @helper partialfunction(MvcHtmlString data) { 
+    <h1>i am returning result using helper function</h1>
+    <div>@data</div>
+    }
+
+    @Html.Partial("_PartialPage1")
+
+    @{ Html.RenderPartial("_PartialPage1");}
+
+</div>
+

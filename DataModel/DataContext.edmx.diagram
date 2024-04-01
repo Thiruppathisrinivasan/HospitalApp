@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="303a87c193ba4a83b713722a2d1e9b4e" Name="Diagram1" ZoomLevel="58" >
+        <EntityTypeShape EntityType="DataContext.AppointmentBooking" Width="1.5" PointX="2.75" PointY="5.75" />
+        <EntityTypeShape EntityType="DataContext.Availabilityslots" Width="1.5" PointX="5.75" PointY="3.75" />
+        <EntityTypeShape EntityType="DataContext.CodeController" Width="1.5" PointX="7.75" PointY="3.75" />
+        <EntityTypeShape EntityType="DataContext.DoctorAvailabilityMaster" Width="1.5" PointX="5.75" PointY="0.875" />
+        <EntityTypeShape EntityType="DataContext.DoctorSchedule" Width="1.5" PointX="4.75" PointY="7.75" />
+        <EntityTypeShape EntityType="DataContext.Doctorscheduledetails" Width="1.5" PointX="8" PointY="0.875" />
+        <EntityTypeShape EntityType="DataContext.EmployeeDetails" Width="1.5" PointX="0.75" PointY="1.125" />
+        <EntityTypeShape EntityType="DataContext.LoginCredentials" Width="1.5" PointX="3" PointY="2.375" />
+        <EntityTypeShape EntityType="DataContext.PatientDetails" Width="1.5" PointX="0.75" PointY="7.5" />
+        <EntityTypeShape EntityType="DataContext.slotdetails" Width="1.5" PointX="7.75" PointY="6.75" />
+        <AssociationConnector Association="DataContext.FK__Doctorsch__Avail__52593CB8" />
+        <AssociationConnector Association="DataContext.FK__LoginCred__Emplo__4316F928" />
+        <AssociationConnector Association="DataContext.FK__LoginCred__Patie__4222D4EF" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

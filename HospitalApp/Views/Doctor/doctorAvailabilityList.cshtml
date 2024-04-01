@@ -1,0 +1,115 @@
+﻿
+@model HospitalApp.Models.DoctorScheduleListModel
+
+
+
+
+@*<table class="table table-striped text-center mt-3">
+    <tr class="">
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>Availability</th>
+        </tr>
+        <tr>
+            <th>Date</th>
+            <th>session</th>
+            <th>slots</th>
+            <th>session</th>
+            <th>slots</th>
+            <th>session</th>
+            <th>slots</th>
+        </tr>
+       
+    </thead>
+    <tbody>
+       
+        
+          @foreach (var item in Model.ResultField.data)
+          {
+            <tr>
+                <td>@item.Date</td>
+                <td>@item.session</td>
+                <td>@item.slotTime</td>
+            </tr>
+          }
+
+            
+    </tbody>     
+ </table>*@
+   
+
+<table class="table table-striped text-center mt-3">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Morning Session</th>
+            <th>Morning Slots</th>
+            <th>Afternoon Session</th>
+            <th>Afternoon Slots</th>
+            <th>Evening Session</th>
+            <th>Evening Slots</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            string currentDate = "";
+            bool isMorningSet = false;
+            bool isAfternoonSet = false;
+            bool isEveningSet = false;
+
+            foreach (var item in Model.ResultField.data)
+            {
+                if (item.Date != currentDate)
+                {
+                    currentDate = item.Date;
+                    isMorningSet = false;
+                    isAfternoonSet = false;
+                    isEveningSet = false;
+                }
+
+                <tr>
+                    <td>@(isMorningSet || isAfternoonSet || isEveningSet ? "" : currentDate)</td>
+                    @if (!string.IsNullOrEmpty(item.session))
+                    {
+                        if (item.session == "Morning")
+                        {
+                            <td>@item.session</td>
+                            <td>@item.slotTime</td>
+                            isMorningSet = true;
+                        }
+                        else if (item.session == "AfterNoon")
+                        {
+                            <td></td>
+                            <td></td>
+                            <td colspan="">@item.session</td>
+                            <td>@item.slotTime</td>
+                            isAfternoonSet = true;
+                        }
+                        else if (item.session == "Evening")
+                        {
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>@item.session</td>
+                            <td>@item.slotTime</td>
+                            isEveningSet = true;
+                        }
+                    }
+                    else
+                    {
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    }
+                </tr>
+            }
+        }
+    </tbody>
+</table>

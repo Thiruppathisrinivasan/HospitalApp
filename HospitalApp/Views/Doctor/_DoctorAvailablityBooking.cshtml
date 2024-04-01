@@ -1,0 +1,197 @@
+﻿@model HospitalApp.Models.DoctorAvailability
+
+<style>
+.label-container{
+    margin:15px;
+}
+   
+    .form_0,.form_1,.primarycontainer{
+        margin:15px;
+    }
+    .form_0 >input,.form_1>input,.form_1>select,.form_0>select{
+        margin-right:10px;
+    }
+ .disable {
+    cursor: not-allowed;
+    background-color: #EEE;
+    color: #9E9999;
+}
+</style>
+
+<h2>DoctorDashboard</h2>
+
+<h6>schedule Booking</h6>
+
+@using (Html.BeginForm("_DoctorAvailablityBooking", "Doctor", FormMethod.Post, new { @id = "myForm", @class = "form-horizontal", role = "form" }))
+{
+
+    <div class="main">
+        <div class="label-container row text-center">
+            <label for="Date" class="form-label col-md-2">Date</label>
+            <label for="session" class="form-label col-md-2">Session</label>
+            <label for="Time" class="form-label col-md-2">Duration (hrs)</label>
+        </div>
+        <div class="primarycontainer row">
+
+            <div class="date-con col-md-2">
+
+                @Html.TextBoxFor(model => model.Shift[0].Date, new { @class = "form-control col-md-2", type = "date" })
+                @Html.ValidationMessageFor(model => model.Shift[0].Date, string.Empty, new { @class = "text-danger" })
+
+
+            </div>
+            <div class="session-con col-md-2">
+
+                @Html.DropDownListFor(model => model.Shift[0].Session, new SelectList(ViewBag.Sessiondta, "Name", "Name"), "select the session", new { @class = "form-control col-md-2" })
+                @Html.ValidationMessageFor(model => model.Shift[0].Session, string.Empty, new { @class = "text-danger" })
+            </div>
+            <div class="Time-con col-md-2">
+
+                @Html.TextBoxFor(model => model.Shift[0].Time, new { @class = " col-md-2 form-control " })
+                @Html.ValidationMessageFor(model => model.Shift[0].Time, string.Empty, new { @class = "text-danger" })
+            </div>
+
+            <div class="col-md-2">
+               
+            </div>
+        </div>
+        <input type="button" value="+add" class="btn btn-primary clone" id="addlist" />
+        <input type="submit" value="submit" class="btn btn-primary" id="todobutton" />
+     
+
+    </div>
+
+
+
+}
+@{
+
+    if (TempData["msg"] != null)
+    {
+        <script>
+            alert(@TempData["msg"]);
+        </script>
+    }
+
+}
+
+ 
+
+<script src="~/Scripts/jquery-2.0.0.js"></script>
+<script>
+
+    $(document).ready(function () {
+
+        let currentdate = new Date();
+        let year = currentdate.getFullYear();
+        let month = currentdate.getMonth() + 1;
+        let day = currentdate.getDate();
+        month = month < 10 ? "0" + month : month;
+        day = day < 10 ? "0" + day : day;
+        $("#Date").attr('min', `${year}-${month}-${day}`);
+        $(".primarycontainer:first").find('#Session').val("");
+        $(".primarycontainer:first").find('#Time').val("");
+    });
+    let increment = 0;
+        var index = 1;
+        $("#addlist").click(function () {            
+            let form = $(".primarycontainer:first").clone();
+            let removebutton = `<input type="button" class="btn btn-danger" id='remove' value="remove"/>`;
+          
+            let Session = $(".primarycontainer:first").find('#Session').val();
+            let count = $(".main").find('select').length;
+            $(form).find("input,select").each(function () {
+                $(this).attr("name", $(this).attr("name").replace(/\d+/, index));
+                if ($(this).attr("id"))
+                    $(this).attr("id", $(this).attr("id").replace(/\d+/, index));
+            });
+           
+            let date = $(".primarycontainer").find(`#Shift_${index-1}__Date`).val();
+            
+            let session =$(".primarycontainer").find(`#Shift_${index-1}__Session`).val();
+            
+          
+            let time = $(".primarycontainer").find(`#Shift_${index - 1}__Time`).val();
+          
+       
+
+            if (count < 3) {
+                if ((date!= "") && ( session!= "") && ( time!= ""))
+                {
+                    
+
+                    form.insertBefore("#addlist");
+                    form.find('.col-md-2:last-child').append(removebutton);
+                    form.find('input[type="date"]').addClass(`Date_${increment}`);
+                    $(".primarycontainer:not(:first)").find('input[type="date"]').val(date).addClass("disable");
+                    $(".primarycontainer:not(:first)").find("option[value='" + Session + "']").prop("disabled", true);
+
+                    form.find('select').addClass(`Session_${increment}`);
+                    form.find('input[type="text"]').addClass(`Time_${increment}`);
+                    increment++;
+                    index++;
+                } else {
+                    alert("fill required values");
+                }
+                
+            }
+            else {
+                // alert("three entries allowed in same date");
+               
+
+            }
+        });
+        
+
+        
+
+      
+        $(document).on("click", "#remove", function () {
+            console.log("Remove button clicked");
+            $(this).closest('.primarycontainer').remove();
+            index--;
+        });
+
+        $('.primarycontainer:first').find('input[type="date"]').on('change', function () {
+            let Date = $(this).val();
+            $(".primarycontainer:not(:first)").find('input[type="date"]').val(Date).attr('disabled', true);
+        })
+  
+        let sessionvalue1 = "";
+        let sessionvalue2 = "";
+        $('.primarycontainer:first').find('#Shift_0__Session').on('change', function () {
+            let session1 = $(this).val();
+            $('.Session_0,.Session_1').find("option").prop("disabled", false);
+            $('.Session_0,.Session_1').find("option[value='" + session1 + "']").prop("disabled", true);
+            $('.Session_0,.Session_1').val("");
+
+        });
+      
+       
+        $(document).on('change', '.Session_0', function () {
+            sessionvalue = $(this).val();
+            $('.Session_1').find("option[value='" + sessionvalue + "']").prop("disabled", true);
+            $('.Session_1').val("");
+            
+        });
+
+      
+       
+
+           
+       
+</script>
+
+
+
+
+      
+
+
+
+
+
+
+
+
+  

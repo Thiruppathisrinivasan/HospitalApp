@@ -1,0 +1,43 @@
+﻿@model HospitalApp.Models.PatientListModel
+
+@{
+    ViewBag.Title = "PatientList";
+}
+
+<h2>PatientList</h2>
+
+<div class="row mt-3">
+    <div class="col-md-6">
+        @Html.DropDownListFor(model => model.BloodGroup, new SelectList(ViewBag.BloodGroup, "Name", "Name"), "select BloodGroup", new { @class = "form-control" })
+    </div>
+    <div class="col-md-6">
+        <a role="button" class="btn btn-primary" id="btnSearch"> Search</a>
+    </div>
+    <div id="griddata">
+        @Html.Partial("_SearchPatientList", Model)
+    </div>
+</div>
+<script>
+
+    $("#btnSearch").click(function () {
+        var BloodGroup = $('#BloodGroup').val();
+        getData(1, BloodGroup);
+    });
+
+    let getData = (pageNo, BloodGroup) => {
+        var searchdta = { "BloodGroup": BloodGroup, "page": pageNo };
+        $.ajax({
+            url: "@Url.Action("_SearchPatientList", "Admin")",
+            data: searchdta,
+        type: "GET",
+        success: function (result) {
+            if (result != null) {
+                $("#griddata").html(result);
+            }
+        } })};
+</script>
+
+
+
+
+

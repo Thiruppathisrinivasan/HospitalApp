@@ -1,0 +1,50 @@
+﻿@model HospitalApp.Models.PatientAppointmentListModel
+
+@{
+    if (Model.ResultField.data.Any())
+    {
+        <h5 class="h5">Appointment Details</h5>
+<table class="table">
+    <tr>
+        <th>
+            Date
+        </th>
+        <th>
+          Time
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Action
+        </th>
+        
+    </tr>
+
+@foreach (var item in Model.ResultField.data)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Time)
+        </td>
+     
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-primary" }) 
+          
+            @Html.ActionLink("Cancel", "CancelAppointment","Home",new { id=item.Time },  new {@class="btn btn-secondary"})
+        </td>
+    </tr>
+}
+
+</table>
+        }else
+            {
+                <h2> No Appointments yet</h2>
+            }
+    }

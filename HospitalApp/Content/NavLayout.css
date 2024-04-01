@@ -1,0 +1,56 @@
+﻿.logo{
+    width:40px;
+    margin-right:15px;
+}
+#nav-custom{
+    background-color:#607aff;
+}
+.search-button {
+    background-color:#fff;
+    color:#607aff;
+}
+
+.container-one{
+    width:100%;
+    height:400px;
+}
+.dash-section-1{
+    width:40%;
+}
+.dash-section-2{
+    background-image:url(/Content/Images/docpic.jpg);
+    background-repeat:no-repeat;
+    background-size:cover;
+    width:60%;
+}
+.dash-head-1{
+    font-size:40px;
+    font-weight:bolder;
+    margin-bottom:20px;
+    padding:10px;
+}
+.dash-head-2{
+    color:gray;
+    padding:10px;
+}
+.container-two{
+    width:100%;
+    height:250px;
+    background-color:#607aff;
+    border-radius:8px;
+    margin-top:10px;
+    padding:10px;
+}
+#card-image{
+    width:50px;
+}
+.container-three{
+
+}
+.cards{
+    border:none;
+}
+
+.ui-datepicker-calender{
+    background-color:rebeccapurple;
+}

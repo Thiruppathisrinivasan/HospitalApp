@@ -1,0 +1,99 @@
+﻿
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+  
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <link href="~/Content/NavLayout.css" rel="stylesheet" type="text/css"/>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+    <script src="~/Scripts/jquery.validate.bootstrap.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/popper.js"></script>
+    <script src="~/Scripts/popper-utils.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/popper-utils.js"></script>
+    <script src="~/Scripts/jquery-ui-1.13.2.js"></script>
+</head>
+<body>
+   
+    
+    <nav class="navbar navbar-expand-lg"id="nav-custom">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <img src="~/Content/Images/dashborad logo.png" class="logo" />
+@if (@User.Identity.Name == "srini001")
+{
+            @Html.ActionLink("Patient Mapp", "AdminDashboard", "Admin", new { area = string.Empty }, new { @class = "navbar-brand text-white me-5" })
+}
+else if (User.Identity.IsAuthenticated)
+{
+
+    @Html.ActionLink("Patient Mapp", "Dashboard", "Home", new { area = string.Empty }, new { @class = "navbar-brand text-white me-5" })
+
+
+}
+else
+{
+    @Html.ActionLink("Patient Mapp", "Login", "Home", new { area = string.Empty }, new { @class = "navbar-brand text-white me-5" })
+
+}
+                <form class="form-inline me-auto d-flex">
+                <input class="form-control me-4 " type="search" placeholder="Search" aria-label="Search">
+                <button class="btn search-button me-4" type="submit">Search</button>
+            </form>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+               
+            
+                  @if (@User.Identity.Name == "srini001")
+                  {
+                    <li class="nav-item">
+                        @Html.ActionLink("profile", string.Empty, string.Empty, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("settings", "SettingsList", "Admin", new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Employees", "EmployeeList", "Admin", new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Patient", "PatientList", "Admin", new { @class = "nav-link" })
+                    </li>
+
+                  
+
+              }
+                  
+               
+         @if (User.Identity.IsAuthenticated)
+         {
+                <li><h6 class="navbar-text text-white">@User.Identity.Name</h6></li>
+                 <li>
+              @Html.ActionLink("Logout", "Login", "Home", null, new { @class = "btn search-button nav-link ms-2 me-2" })
+          </li>
+         }
+            </ul>
+           
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+       
+       
+    </div>
+
+    
+</body>
+
+
+</html>

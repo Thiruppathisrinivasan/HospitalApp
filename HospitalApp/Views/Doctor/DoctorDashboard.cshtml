@@ -1,0 +1,33 @@
+﻿@model HospitalApp.Models.DoctorAvailability
+@{
+    ViewBag.Title = "DoctorDashboard";
+}
+
+
+<div class="availablity">
+    @if (TempData.ContainsKey("ErrorMsg"))
+    {
+        <script type="text/javascript">
+        alert("only three entries are allowed in same date");
+        </script>
+    }
+ 
+    @if (TempData["msg"] != null)
+    {
+        <script type="text/javascript">
+        alert("data added successfully");
+        </script>
+    }
+    @Html.Partial("_DoctorAvailablityBooking")
+  <hr />
+ <div id="grid-data">
+    @*@Html.Partial("doctorAvailabilityList",Model)*@
+ </div>
+    
+</div>
+
+<div>
+
+</div>
+
+

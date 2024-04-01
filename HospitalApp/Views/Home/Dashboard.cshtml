@@ -1,0 +1,71 @@
+﻿@model HospitalApp.Models.Signup
+
+
+
+
+<div class="container container-one d-flex mt-4">
+    <div class="dash-section-1 d-flex flex-column justify-content-center" >
+<h1 class="dash-head-1">Find your Doctor and make an appointment</h1>
+<p class="dash-head-2">select preferred doctor and time slot to book appointment or consultation</p>
+    </div>
+    <div class="dash-section-2">
+    </div>
+</div>
+
+
+<div class="container container-two d-flex ">
+    <div class="p-2 flex-grow-1">
+        <h3 class="text-white">Easy steps to Get your Solution</h3>
+    </div>
+    <div class="p-2">
+        <p class="text-white">Easy make appointments with our Best Doctor for Your family in sameday or the next day</p>
+    </div>
+    <div class="p-2">
+        
+        @Html.ActionLink("Make an Appointment", "AppointmentBooking","Home", null,new { @class= "btn btn-light search-button" })
+    </div>
+</div>
+
+<div class="parent">
+    <div class="container-three container  d-flex ">
+        <div class="card m-3 cards" style="width:350px;border:none">
+            <div class="card-body text-center">
+                <img src="~/Content/Images/search logo.png" width="80" height="80" />
+
+                <h5 class="card-title">search Doctor</h5>
+                <p class="card-text">Before book Appointment first of all search doctor carefully</p>
+
+            </div>
+        </div>
+        <div class="card m-3 cards" style="width:350px;border:none">
+            <div class="card-body text-center">
+                <img src="~/Content/Images/location-logo.png" width="80" height="80" />
+                <h5 class="card-title">Choose your location</h5>
+                <p class="card-text">Then enter your Location and we will help you find appointment near you </p>
+
+            </div>
+        </div>
+        <div class="card m-3 cards" style="width:350px;border:none">
+            <div class="card-body text-center">
+                <img src="~/Content/Images/calender-logo.png" width="80" height="80" />
+
+                <h5 class="card-title">schedule Appointment</h5>
+                <p class="card-text">Then select the date to Appointment with doctor</p>
+
+            </div>
+        </div>
+        <div class="card m-3 cards" style="width:350px;border:none;">
+            <div class="card-body text-center">
+                <img src="~/Content/Images/solution-logo.png" width="80" height="80" />
+                <h5 class="card-title">Get your Solution</h5>
+                <p class="card-text">We Will help find and provide solution for your health</p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

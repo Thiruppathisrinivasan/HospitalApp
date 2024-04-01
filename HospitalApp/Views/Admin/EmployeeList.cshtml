@@ -1,0 +1,38 @@
+﻿@model HospitalApp.Models.EmployeeListModal
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<div class="row mt-3">
+    <div class="col-md-6">
+        @Html.DropDownListFor(model => model.Role, new SelectList(ViewBag.Role, "Name", "Name"), "select Role", new { @class = "form-control" })
+    </div>
+    <div class="col-md-6">
+        <a role="button" class="btn btn-primary" id="btnSearch"> Search</a>
+    </div>
+    <div id="griddata">
+        @Html.Partial("_SearchEmployeeList", Model)
+    </div>
+</div>
+<script>
+
+    $("#btnSearch").click(function () {
+        var Role = $('#Role').val();
+        getData(1, Role);
+    });
+
+    let getData = (pageNo, Role) => {
+        debugger;
+        var searchdta = { "Role":Role, "page": pageNo };
+        $.ajax({
+            url: "@Url.Action("_SearchEmployeeList", "Admin")",
+            data: searchdta,
+        type: "GET",
+        success: function (result) {
+            if (result != null) {
+                $("#griddata").html(result);
+            }
+        } })};
+</script>
+
+

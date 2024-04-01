@@ -1,0 +1,124 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model HospitalApp.Models.DashboardModel
+
+
+
+
+
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AdminDashboard</title>
+</head>
+<body>
+    <div>
+        <h1 class="">
+            admin dashboard
+        </h1>
+        <h3>Employee details</h3>
+        @Html.ActionLink("create employee", "EmployeeCreation", "Admin")
+
+        @Html.Partial("_EmployeeDetails", Model.EmpList)
+
+    </div>
+    <div>
+        <h1>patient details</h1>
+        @Html.ActionLink("create patient", "Signup", "Home")
+
+        <table class="table table-success table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>Blood group</th>
+                    <th>Contact Number</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var patient in Model.PatList)
+                {
+                    <tr>
+                        <td>@patient.strName</td>
+                        <td>@patient.bytGender</td>
+                        <td>@patient.intBloodGroup</td>
+                        <td>@patient.strContact</td>
+                        <td>
+                            @Html.ActionLink("edit", "Signup", "Home", new { id = patient.patID }, new { @class = "btn btn-secondary" })
+                            @Html.ActionLink("delete", "DeletePatient", "Home", new { id = patient.patID }, new { @class = "btn btn-secondary" })
+
+
+
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+            <tfoot>
+
+            </tfoot>
+        </table>
+    </div>
+
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="btnAdd">
+        create new dropdown
+    </button>
+
+    <!-- Create new Dropdown -->
+    <div id="popup"></div>
+
+    <script>
+
+
+        $("#btnAdd").click(function () {
+            @*var codename = $(".codename").val();
+        var name = $(".name").val();
+        var des = $(".des").val();
+        alert("data");
+        if ((codename.length >= 4) && (name.length >= 4)) {
+            var data = new { CodeName: codename, Name: name, des: des };
+            $.ajax({
+                url: "@Url.Action("MasterPopUp", "Admin")",
+                content: data,
+                type: "POST",
+                success: function (result) {
+                    alert("data saved successfully" + result);
+                },
+
+            });
+        }*@
+            CreateMaster(0);
+        });
+
+
+        function CreateMaster(value) {
+            $.ajax({
+                url: "@Url.Action("_popupAddMasterDetails", "Admin")",
+                content: { "ID": value },
+                type: "GET",
+                success: function (result) {
+                    if (result != null) {
+                        $("#popup").html(result);
+                        $("#createModal").modal("show");
+                    }
+                },
+
+            });
+        }
+
+    </script>
+</body>
+</html>

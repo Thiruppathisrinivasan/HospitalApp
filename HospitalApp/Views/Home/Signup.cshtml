@@ -1,0 +1,131 @@
+﻿@model HospitalApp.Models.Signup
+@{
+    ViewBag.Title = "Signup";
+    Layout = "~/Views/Shared/Login_layout.cshtml";
+
+
+}
+
+<style>
+   
+    body{
+        background-image:linear-gradient(rgba(228,228,247,255),rgba(249,231,228,255));
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        padding:50px;
+    
+    }
+    .signup-container{
+        background-color:#fff;
+        height:500px;
+    }
+</style>
+<div class="container signup-container">
+
+    <form method="post">
+       
+        <div class="form-container d-flex justify-content-center ">
+            <h2>Personal Details</h2> 
+            <div class="form-section-1 d-flex justify-content-center">
+                <div>
+                    @Html.Label("enter the name", new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.strName, new { @class = "form-control " })
+                    @Html.ValidationMessageFor(model => model.strName, "", new { @class = "text-danger" })
+                </div>
+                <div>
+                    @Html.Label("ID", new { @class = "form-label" })
+                    @Html.HiddenFor(model => model.patID)
+                </div>
+                <div>
+                    @Html.Label("select the gender", new { @class = "form-label" })
+                    @Html.DropDownListFor(model => model.bytGender, new SelectList(ViewBag.Gender, "Name", "Name"), "Select the Gender",
+                  new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.bytGender, "", new { @class = "text-danger" })
+                </div>
+                <div>
+                    @Html.Label("enter the dob", new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.dtDob, new { @class = "form-control ", @type = "date" })
+                    @Html.ValidationMessageFor(model => model.dtDob, "", new { @class = "text-danger" })
+                </div>
+                <div class="">
+                    @Html.Label("enter the age", new { @class = "form-label", @type = "number" })
+                    @Html.TextBoxFor(model => model.intAge, new { @class = "form-control " })
+                    @Html.ValidationMessageFor(model => model.intAge, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-section-2 d-flex justify-content-center">
+                <div>
+                    @Html.Label("select the marital status", new { @class = "form-label" })
+                    </br>
+                    Married:   @Html.RadioButtonFor(model => model.bytMaritalStatus, "Married")
+                    Unmarried: @Html.RadioButtonFor(model => model.bytMaritalStatus, "unmarried")
+                    @Html.ValidationMessageFor(model => model.bytMaritalStatus, "", new { @class = "text-danger" })
+                </div>
+                <div>
+                    @Html.Label("enter the blood group", new { @class = "form-label" })
+                    @Html.DropDownListFor(model => model.intBloodGroup, new SelectList(ViewBag.BloodGroup, "Name", "Name"), "Select the BloodGroup", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.intBloodGroup, "", new { @class = "text-danger" })
+                </div>
+                <div>
+                    @Html.Label("enter the address", new { @class = "form-label" })
+                    @Html.TextAreaFor(model => model.strAddress, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.strAddress, "", new { @class = "text-danger" })
+                </div>
+                <div>
+                    @Html.Label("enter your nationality", new { @class = "form-label" })
+                    @Html.DropDownListFor(model => model.intNationalty, new SelectList(ViewBag.Country, "Name", "Name"), "Select the Country", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.intNationalty, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-section-3 ">
+                <div class="">
+                    @Html.Label("enter the email", new { @class = "form-label", @type = "email" })
+                    @Html.TextBoxFor(model => model.strEmail, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.strEmail, "", new { @class = "text-danger" })
+                </div>
+                <div>
+                    @Html.Label("enter your mobile number", new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.strContact, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.strContact, "", new { @class = "text-danger" })
+                </div>
+                <div>
+                    @Html.Label("enter your username", new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.strUserName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.strUserName, "", new { @class = "text-danger" })
+                </div>
+                <div class="">
+
+                    @Html.Label("enter your password", new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.strPassword, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.strPassword, "", new { @class = "text-danger" })
+                </div>
+                <div class="">
+                    @Html.Label("enter confirm password", new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.strConfirmPwd, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.strConfirmPwd, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+            <div class="form-section-4">
+                <input type="submit" value="submit" class="btn btn-primary" />
+
+            </div>
+
+
+        </div>
+    </form>
+</div>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+    $("#dtDob").on('change', function () {
+        console.log($('#dtDob').val());
+        var inputDate = new Date($('#dtDob').val());
+        var inputYear = inputDate.getFullYear();
+        var todayYear = new Date().getFullYear();
+        var age = todayYear - inputYear;
+        $('#intAge').val(age);
+        $('#intAge').attr("disabled", true);
+    });
+
+
+
+</script>

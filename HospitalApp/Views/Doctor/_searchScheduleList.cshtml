@@ -1,0 +1,241 @@
+﻿@model HospitalApp.Models.DoctorScheduleListModel
+
+
+
+
+    <table class="table table-striped text-center mt-3">
+        <tr class="">
+            <th>
+                Date
+            </th>
+            <th>session</th>
+            <th>slotTime</th>
+            <th>Patient</th>
+            <th>Action</th>
+        </tr>
+        <tbody>
+            @foreach (var item in Model.ResultField.data)
+            {
+                <tr>
+                    <td>
+                        @item.Date
+                    </td>
+                    <td>
+                        @item.session
+                    </td>
+                    <td>
+                        @item.slotTime
+                    </td>
+                    @if (@item.patientID == 0)
+                {
+                        <td>
+                            not booked
+                        </td>}
+                else
+                {
+                        <td class="fw-bold">
+                            booked
+                        </td>
+                    }
+                    <td>
+
+                        @Html.Hidden(@item.status)
+
+                        @Html.ActionLink("Leave", "Leave", new { id = item.scheduleID }, new { @class = "btn btn-primary me-2 leave", id = @item.status })
+
+
+
+                        <button type="button" class="btn btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#detailsModal-@item.scheduleID">
+                            Details
+                        </button>
+
+                        @Html.ActionLink("Delete", "Delete", new { id = item.scheduleID }, new { @class = "btn btn-danger" })
+                        <div class="modal fade" id="detailsModal-@item.scheduleID" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="detailsModalLabel-@item.scheduleID" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="detailsModalLabel-@item.scheduleID">Schedule Details</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Slot Time</th>
+                                                    <th>Patient ID</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>@item.Date</td>
+                                                    <td>@item.slotTime</td>
+                                                    <td>@item.patientID</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>
+                    @{
+                        var maxpage = Model.ResultField.visiblePages;
+                        var startpage = 1;
+
+                        if (Model.ResultField.TotalPages < Model.ResultField.visiblePages)
+                        {
+                            startpage = 1;
+                            maxpage = Model.ResultField.TotalPages;
+                        }
+                        else if (Model.ResultField.CurrentPage >= maxpage)
+                        {
+                            startpage = Model.ResultField.CurrentPage;
+
+                            if (startpage + Model.ResultField.visiblePages <= Model.ResultField.TotalPages)
+                            {
+                                maxpage = startpage + Model.ResultField.visiblePages;
+                            }
+                            else
+                            {
+                                maxpage = Model.ResultField.TotalPages;
+                            }
+
+                            if (maxpage > Model.ResultField.TotalPages)
+                            {
+                                maxpage = Model.ResultField.TotalPages;
+                                startpage = maxpage - (Model.ResultField.visiblePages - 1);
+                            }
+                        }
+                        if (Model.ResultField.TotalPages > Model.ResultField.visiblePages)
+                        {
+                            <a id='firstPage' name="pageButton" class="btn btn-primary  btn-md" href="#" onclick="return false;">First</a>
+                            <a id='previousPage' name="pageButton" class="btn btn-default  btn-md" href="#" onclick="return false;">Previous</a>
+                        }
+
+                        for (int i = startpage; i <= maxpage; i++)
+                        {
+
+
+                            if (i == Model.ResultField.CurrentPage)
+                            {
+                                <a id='currentPage' name="pageButton" class="btn btn-primary  btn-md" href="#" onclick="return false;">@i</a>
+                            }
+                            else
+                            {
+                                <a name="pageButton" class="btn btn-default btn-md" href="#" onclick="return false;">@i</a>
+                            }
+                        }
+                        if (Model.ResultField.TotalPages > Model.ResultField.visiblePages)
+                        {
+                            <a id='nextPage' name="pageButton" class="btn btn-default  btn-md" href="#" onclick="return false;">Next</a>
+                            <a id='lastPage' name="pageButton" class="btn btn-primary  btn-md" href="#" onclick="return false;">Last</a>
+                        }
+                    }
+                </td>
+
+
+            </tr>
+        </tfoot>
+
+    </table>
+
+<script src="~/Scripts/jquery-2.0.0.js"></script>
+<script>
+
+
+    //for pagination
+
+    $(document).ready(function () {
+        debugger;
+        var firstpage = 1;
+        var lastpage = '@Model.ResultField.TotalPages';
+        var currentPage = $('#currentPage').text();
+
+        if (parseInt(currentPage, 10) === parseInt(lastpage, 10)) {
+            $('#lastPage').addClass('disabled');
+            $('#nextPage').addClass('disabled');
+        }
+        else if (parseInt(currentPage, 10) === parseInt(firstpage, 10)) {
+            $('#firstPage').addClass('disabled');
+            $('#previousPage').addClass('disabled');
+        }
+
+        $(".leave").each(function () {
+            var idValue = $(this).attr('id');
+            if (idValue === "Transferred") {
+                $(this).text("Waiting for approval");
+            } else if (idValue === "Approved") {
+                $(this).text("Transfer Approved");
+                $(this).attr("disabled", true);
+            } else {
+                $(this).text("Leave");
+            }
+        });
+
+    });
+
+    let getData = (pageNo) => {
+        var searchdta = {  "page": pageNo };
+        $.ajax({
+            url: "@Url.Action("_searchScheduleList", "Doctor")",
+            data: searchdta,
+        type: "GET",
+        success: function (result) {
+            if (result != null) {
+                console.log(result);
+                $("#griddata").html(result);
+            }
+        } })};
+
+    $('a[name="pageButton"]').click(function () {
+        alert("hi");
+
+        debugger;
+        var pageNo = 1;
+        var lastpage = '@Model.ResultField.TotalPages';
+        if ($(this).text() === 'First') {
+            pageNo = 1;
+        }
+        else if ($(this).text() === 'Last') {
+            pageNo = lastpage;
+        }
+        else if ($(this).text() === 'Previous') {
+            if (parseInt($('#currentPage').text(), 10) > 1) {
+                pageNo = parseInt($('#currentPage').text(), 10) - 1;
+            }
+
+        }
+        else if ($(this).text() === 'Next') {
+
+            pageNo = parseInt($('#currentPage').text(), 10) + 1;
+        }
+        else {
+            pageNo = $(this).text();
+        }
+        var Date = $('#Date').val();
+
+
+        getData(pageNo);
+        console.log(getData(pageNo));
+    });
+
+
+
+
+
+
+</script>

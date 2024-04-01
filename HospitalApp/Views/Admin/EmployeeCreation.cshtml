@@ -1,0 +1,124 @@
+﻿@model HospitalApp.Models.EmployeeModal
+
+@{
+   
+}
+
+<h1>Employee Details</h1>
+
+<form method="post">
+    <div class="container-fluid">
+        <div class="form-section-1">
+            <div>
+                @Html.Label("enter the EmployeeCode", new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.intEmpId, new { @class = "form-control " })
+                @Html.ValidationMessageFor(model => model.intEmpId, "", new { @class = "text-danger" })
+                @Html.TextBoxFor(model=>model.Id)
+            </div>
+          
+            <div>
+                @Html.Label("Role", new { @class = "form-label" })
+                @Html.DropDownListFor(model => model.Role, new SelectList(ViewBag.Role,"Name","Name"),"select a role", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
+            </div>
+               <div>
+                @Html.Label("enter the name", new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.strEmpName, new { @class = "form-control " })
+                @Html.ValidationMessageFor(model => model.strEmpName, "", new { @class = "text-danger" })
+            </div>
+
+            <div>
+                @Html.Label("select the gender", new { @class = "form-label" })
+                @Html.DropDownListFor(model => model.byGender, new SelectList(ViewBag.Gender, "Name", "Name"), "select the Gender", new { @class = "form-control" })
+
+
+                @Html.ValidationMessageFor(model => model.byGender, "", new { @class = "text-danger" })
+            </div>
+            
+                <div>
+                    @Html.Label("enter the dob", new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.dtDob, new { @class = "form-control ", @type = "date" })
+                    @Html.ValidationMessageFor(model => model.dtDob, "", new { @class = "text-danger" })
+                </div>
+           
+        </div>
+        <div class="form-section-2">
+            <div>
+                @Html.Label("enter the age", new { @class = "form-label", @type = "number" })
+                @Html.TextBoxFor(model => model.intAge, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.intAge, "", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.Label("enter the Bloodgroup", new { @class = "form-label", @type = "text" })
+                @Html.DropDownListFor(model => model.Bloodgrp, new SelectList(ViewBag.Bloodgroup, "Name", "Name"), "select the Bloodgroup", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Bloodgrp, "", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.Label("select the marital status", new { @class = "form-label" })
+                </br>
+                Married:   @Html.RadioButtonFor(model => model.byMaritalStatus, "Married")
+                Unmarried: @Html.RadioButtonFor(model => model.byMaritalStatus, "unmarried")
+                @Html.ValidationMessageFor(model => model.byMaritalStatus, "", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.Label("enter the Qualification", new { @class = "form-label", @type = "text" })
+                @Html.DropDownListFor(model => model.strQualification, new SelectList(ViewBag.Qualification,"Name","Name"),"Select the qualification",new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.strQualification, "", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.Label("enter the specialization", new { @class = "form-label", @type = "number" })
+                @Html.DropDownListFor(model => model.intSpecialization, new SelectList(ViewBag.DoctorCategory, "Name", "Name"), "Select the specialization",
+                  new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.intSpecialization, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-section-3">
+            <div>
+                @Html.Label("date of joining", new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.dtDoj, new { @class = "form-control ", @type = "date" })
+                @Html.ValidationMessageFor(model => model.dtDoj, "", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.Label("enter the address", new { @class = "form-label" })
+                @Html.TextAreaFor(model => model.strAddress, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.strAddress, "", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.Label("enter the email", new { @class = "form-label", @type = "email" })
+                @Html.TextBoxFor(model => model.strEmail, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.strEmail, "", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.Label("enter your mobile number", new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.strContactNo, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.strContactNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-section-4">
+            <div>
+                @Html.Label("enter your nationality", new { @class = "form-label" })
+                @Html.DropDownListFor(model => model.intNationality, new SelectList(ViewBag.Country, "Name", "Name"), "select a Country", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.intNationality, "", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.Label("enter your username", new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.strUserName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.strUserName, "", new { @class = "text-danger" })
+            </div>
+            <div>
+
+                @Html.Label("enter your password", new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.strPassword, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.strPassword, "", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.Label("enter confirm password", new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.strConfirmPassword, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.strConfirmPassword, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+      <input type="submit" value="submit" class="btn btn-dark"/>
+    </div>
+</form>
